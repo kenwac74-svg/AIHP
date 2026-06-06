@@ -13,6 +13,15 @@ const wireLink=(selector,url)=>{
   });
 };
 
+const footerLinkMap={
+  Terms:'terms.html',
+  'Privacy Policy':'privacy-policy.html'
+};
+document.querySelectorAll('.footer a').forEach((link)=>{
+  const target=footerLinkMap[link.textContent.trim()];
+  if(target) link.setAttribute('href',target);
+});
+
 wireLink('.hero-actions .btn-primary',platformUrl);
 wireLink('#access .btn-gold',platformUrl);
 wireLink('#yield .product-cta-v83',platformProductsUrl);
