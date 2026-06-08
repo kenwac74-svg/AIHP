@@ -1,5 +1,22 @@
 const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
+/* Mobile navigation toggle */
+(function(){
+  const toggle=document.getElementById('navToggle');
+  const links=document.getElementById('navLinks');
+  if(!toggle||!links) return;
+  const setOpen=(open)=>{
+    links.classList.toggle('open',open);
+    toggle.classList.toggle('open',open);
+    toggle.setAttribute('aria-expanded',open?'true':'false');
+  };
+  toggle.addEventListener('click',(e)=>{e.stopPropagation();setOpen(!links.classList.contains('open'));});
+  links.querySelectorAll('a').forEach((a)=>a.addEventListener('click',()=>setOpen(false)));
+  document.addEventListener('click',(e)=>{if(!e.target.closest('.nav'))setOpen(false);});
+  window.addEventListener('keydown',(e)=>{if(e.key==='Escape')setOpen(false);});
+})();
+
+
 const platformUrl='https://kenwac74-svg.github.io/AIPK/';
 const platformProductsUrl='https://kenwac74-svg.github.io/AIPK/#packages';
 
