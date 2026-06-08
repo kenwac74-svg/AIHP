@@ -108,3 +108,31 @@ if(board){
   setInterval(render,3500);
   setInterval(()=>{save();render();},30000);
 }
+
+/* Live engine tablets — casino edges + quant terminal tick (mock, no DB) */
+(function(){
+  const rnd=(a,b)=>a+Math.random()*(b-a);
+  const flash=(el)=>{el.classList.remove('vflash');void el.offsetWidth;el.classList.add('vflash');};
+
+  // Casino "Live Tables" — fluctuating house edge per table
+  const edges=[...document.querySelectorAll('.casino-viz .viz-row b.pos')];
+  const edgeBase=[3.2,2.7,4.1];
+  const tickEdges=()=>edges.forEach((el,i)=>{
+    const v=Math.max(0.9,edgeBase[i]+rnd(-0.6,0.7));
+    el.textContent='edge +'+v.toFixed(1)+'%';flash(el);
+  });
+
+  // Quant terminal — fluctuating latency / PnL / sharpe
+  const qv=document.querySelector('.quant-viz');
+  const q=(k)=>qv&&qv.querySelector('[data-q="'+k+'"]');
+  const setPnl=(el,lo,hi)=>{if(!el)return;const v=rnd(lo,hi);el.textContent=(v>=0?'+':'')+v.toFixed(2)+'%';el.className=(v>=0?'t-green':'t-red');flash(el);};
+  const tickQuant=()=>{
+    const lat=q('lat'); if(lat){lat.textContent=rnd(0.18,0.52).toFixed(2)+' ms';flash(lat);}
+    setPnl(q('btc'),-0.30,1.15);
+    setPnl(q('eth'),-0.18,0.78);
+    const sh=q('sharpe'); if(sh){sh.textContent=rnd(1.8,2.5).toFixed(1);flash(sh);}
+  };
+
+  if(edges.length){tickEdges();setInterval(tickEdges,2600);}
+  if(qv){tickQuant();setInterval(tickQuant,1500);}
+})();
