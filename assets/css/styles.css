@@ -154,9 +154,13 @@ h1{
   color:var(--cream)!important;
 }
 
-/* Eyebrow / kicker labels stay Inter, tightened tracking */
-.section-title span,
+/* Eyebrow / kicker labels stay Inter, tightened tracking.
+   NOTE: must be the DIRECT child span only — otherwise it also grabs the
+   .gold/.blue spans inside <h2> and forces them to sans-serif. */
+.section-title > span,
 .eyebrow{font-family:'Inter',sans-serif!important;}
+.section-title h2 .gold,
+.section-title h2 .blue{font-family:'Cinzel',Georgia,serif!important;font-weight:800!important;}
 
 /* --- Financial data -> Inter w/ tabular figures (spec) --- */
 .stat b,
@@ -205,9 +209,10 @@ h1{
 /* Buttons: tighter, premium */
 .btn{font-family:'Inter',sans-serif!important;}
 
-/* Section vertical rhythm: a touch more breathing room */
-section{padding:120px 0!important;}
-@media(max-width:620px){section{padding:78px 0!important;}}
+/* Section vertical rhythm */
+section{padding:84px 0!important;}
+.hero{min-height:auto!important;padding-bottom:54px!important;}
+@media(max-width:620px){section{padding:60px 0!important;}.hero{padding-bottom:36px!important;}}
 
 /* Hero spacing fix: Cinzel caps are taller — prevent gold/paragraph overlap */
 .hero h1{margin:24px 0 30px!important;}
