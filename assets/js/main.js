@@ -60,7 +60,7 @@ if(board){
   const planSteps=[100,200,500,1000,5000];
   const names=['Dragon_King_88','Golden_Whale','K-Capital_M','Ruby_Quant_7','BlueVault_AI','Neon_Baccarat','CNYT_Rider','Alpha_Wheel','FutureAce_10','VIP_Crown_X'];
   const now=Date.now();
-  const stored=JSON.parse(localStorage.getItem('longriseLiveProfitDemo')||'null');
+  const stored=JSON.parse(localStorage.getItem('longriseTotalValueDemo')||'null');
   const state=stored&&Array.isArray(stored.players)?stored:{
     createdAt:now,
     lastWalletAt:now,
@@ -68,10 +68,10 @@ if(board){
     walletRate:10+Math.floor(Math.random()*11),
     lastPurchaseAt:now,
     nextPurchaseDelay:60000+Math.floor(Math.random()*60000),
-    players:names.map((name,index)=>({name,amount:[54200,42150,38900,34800,31500,27900,24300,21100,18400,15100][index]+(index%5)*50}))
+    players:names.map((name,index)=>({name,amount:[250400,227150,201900,187400,164800,142300,118650,96400,84200,71500][index]+(index%5)*50}))
   };
   let offset=0;
-  const save=()=>localStorage.setItem('longriseLiveProfitDemo',JSON.stringify(state));
+  const save=()=>localStorage.setItem('longriseTotalValueDemo',JSON.stringify(state));
   const formatMoney=(value)=>'$'+Math.round(value).toLocaleString('en-US')+'.'+String(Math.floor(value*100)%100).padStart(2,'0');
   const walletCount=()=>{
     const elapsedHours=(Date.now()-state.createdAt)/3600000;
@@ -99,9 +99,9 @@ if(board){
     maybePurchase();
     const rows=visibleRows().map((playerIndex)=>{
       const player=state.players[playerIndex];
-      return `<div class="row"><span class="rank">${String(playerIndex+1).padStart(2,'0')}</span><div><span class="game">${player.name}</span><span class="sub">Live Profits</span></div><span class="gain">${formatMoney(player.amount)}</span></div>`;
+      return `<div class="row"><span class="rank">${String(playerIndex+1).padStart(2,'0')}</span><div><span class="game">${player.name}</span></div><span class="gain">${formatMoney(player.amount)}</span></div>`;
     }).join('');
-    board.innerHTML=`<div class="board-head"><b>Live Profits</b><span class="live">● LIVE</span></div>${rows}<div style="margin-top:16px;color:#fbbf24;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.18em">${walletCount().toLocaleString('en-US')} Wallets · Profit Hub</div>`;
+    board.innerHTML=`<div class="board-head"><b>Total Value</b><span class="live">● LIVE</span></div>${rows}<div style="margin-top:16px;color:#fbbf24;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.18em">${walletCount().toLocaleString('en-US')} Wallets · Profit Hub</div>`;
     offset=(offset+1)%state.players.length;
   };
   render();

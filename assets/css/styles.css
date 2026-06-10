@@ -509,9 +509,8 @@ section{padding:84px 0!important;}
   border:1px solid rgba(251,191,36,.32);border-radius:24px;padding:36px 26px;
   background:radial-gradient(120% 90% at 50% 0,rgba(251,191,36,.13),transparent 62%),linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
   box-shadow:0 24px 60px rgba(0,0,0,.55);}
-.cnyt-coin{width:124px;height:124px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:20px;
-  background:radial-gradient(circle at 50% 34%,rgba(251,191,36,.28),rgba(0,0,0,.45));
-  border:1px solid rgba(251,191,36,.5);box-shadow:0 0 42px rgba(251,191,36,.22),inset 0 0 28px rgba(0,0,0,.55);}
+.cnyt-coin{width:148px;height:148px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.cnyt-coin .cnyt-chip{width:100%;height:auto;display:block;filter:drop-shadow(0 0 36px rgba(251,191,36,.28)) drop-shadow(0 14px 30px rgba(0,0,0,.6));}
 .cnyt-coin .cnyt-mono{font-family:'Cinzel',Georgia,serif;font-size:58px;font-weight:900;color:var(--gold-glow);line-height:1;letter-spacing:.02em;text-shadow:0 4px 14px rgba(0,0,0,.6);}
 .cnyt-sym{font-family:'Cinzel',Georgia,serif;font-size:30px;font-weight:800;letter-spacing:.16em;color:var(--gold-glow);}
 .cnyt-name{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#a79c93;margin-top:7px;font-weight:800;}
@@ -531,3 +530,37 @@ section{padding:84px 0!important;}
 .cf p{margin:0;color:#a79c93;font-size:12.5px;line-height:1.5;}
 @media(max-width:860px){.cnyt-grid{grid-template-columns:1fr;}}
 @media(max-width:560px){.cnyt-facts{grid-template-columns:1fr;}}
+
+/* === Readability pass: larger kickers/labels, 16px min for info text, sentence-per-line intros === */
+/* 1. Section kickers */
+.section-title span{font-size:16px!important;letter-spacing:.22em!important;}
+/* 2. CNYT card labels & facts */
+.cnyt-name{font-size:14px!important;letter-spacing:.12em!important;}
+.cnyt-issuer{font-size:13px!important;}
+.cnyt-note{font-size:13.5px!important;}
+.cp-now span,.cnyt-path .cp-target span{font-size:11px!important;}
+.cf p{font-size:16px!important;line-height:1.6!important;}
+.cf > span{font-size:12.5px!important;letter-spacing:.16em!important;}
+/* 3. Readable info text minimum (~16px, matches .card p) */
+.engine-list li{font-size:15.5px!important;line-height:1.55!important;}
+.engine-lead{font-size:16px!important;}
+.ri-desc{font-size:16px!important;line-height:1.65!important;}
+.ri-kicker{font-size:13px!important;}
+.gs-text > span{font-size:15px!important;line-height:1.5!important;}
+.gs-text > b{font-size:17px!important;}
+.product-label-v83{font-size:14.5px!important;}
+.product-reward-v83{font-size:14.5px!important;}
+.product-term-v83{font-size:15px!important;}
+.rank-role{font-size:12px!important;letter-spacing:.12em!important;}
+.bottom-proof-v83{font-size:15px!important;}
+.ri-mini span{font-size:11px!important;}
+/* 4. Natural line wrapping */
+p,.section-title p,.hero p,.cf p,.ri-desc,.gs-text > span,.card p{text-wrap:pretty;}
+/* sentence-per-line in section intros: each sentence is its own line on desktop */
+.section-title p{max-width:1200px!important;}
+.section-title p .sent{display:block;font-size:inherit!important;color:inherit!important;letter-spacing:normal!important;text-transform:none!important;font-weight:inherit!important;}
+
+/* --- Brand lockup images (nav + footer) --- */
+.brand-lockup{height:48px;width:auto;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5));}
+.footer-lockup{height:36px;width:auto;display:block;margin-bottom:4px;}
+@media(max-width:620px){.brand-lockup{height:38px;}.footer-lockup{height:32px;}}
