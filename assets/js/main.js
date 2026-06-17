@@ -16,7 +16,6 @@ const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isInters
   window.addEventListener('keydown',(e)=>{if(e.key==='Escape')setOpen(false);});
 })();
 
-
 const platformUrl='https://kenwac74-svg.github.io/AIPK/';
 const platformProductsUrl='https://kenwac74-svg.github.io/AIPK/#packages';
 
@@ -30,14 +29,46 @@ const wireLink=(selector,url)=>{
   });
 };
 
-const footerLinkMap={
-  Terms:'terms.html',
-  'Privacy Policy':'privacy-policy.html'
-};
-document.querySelectorAll('.footer a').forEach((link)=>{
-  const target=footerLinkMap[link.textContent.trim()];
-  if(target) link.setAttribute('href',target);
-});
+(function updateFooterLinks(){
+  const linkTargets={
+    'Terms':'terms.html',
+    'Privacy Policy':'privacy-policy.html',
+    'Risk Notice':'risk-notice.html',
+    'Responsible Gaming':'ResponsibleGaming.html',
+    'Telegram':'https://t.me/+7E0dwPurJjBmM2Fl',
+    'Support Center':'mailto:biz@longrise.ai',
+    'Business Inquiry':'mailto:support@longrise.ai'
+  };
+  document.querySelectorAll('.footer a').forEach((link)=>{
+    const label=link.textContent.trim();
+    if(label==='Email'){
+      link.remove();
+      return;
+    }
+    if(label.startsWith('CNYT Foundation')){
+      link.setAttribute('href','https://cnyt.workd');
+      link.setAttribute('target','_blank');
+      link.setAttribute('rel','noopener');
+      return;
+    }
+    if(label.startsWith('Gaming Partners')){
+      link.setAttribute('href','GamingPartners.html');
+      return;
+    }
+    if(label.startsWith('Strategic Alliance')){
+      link.setAttribute('href','StrategicAlliance.html');
+      return;
+    }
+    const target=linkTargets[label];
+    if(target){
+      link.setAttribute('href',target);
+      if(target.startsWith('https://')){
+        link.setAttribute('target','_blank');
+        link.setAttribute('rel','noopener');
+      }
+    }
+  });
+})();
 
 wireLink('.hero-actions .btn-primary',platformUrl);
 wireLink('#access .btn-gold',platformUrl);
