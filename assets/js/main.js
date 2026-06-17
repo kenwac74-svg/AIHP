@@ -35,7 +35,7 @@ const wireLink=(selector,url)=>{
     'Privacy Policy':'privacy-policy.html',
     'Risk Notice':'risk-notice.html',
     'Responsible Gaming':'ResponsibleGaming.html',
-    'Telegram':'https://t.me/+7E0dwPurJjBmM2Fl',
+    'Telegram':'http://t.me/Longrise_Support',
     'Support Center':'mailto:biz@longrise.ai',
     'Business Inquiry':'mailto:support@longrise.ai'
   };
@@ -62,7 +62,7 @@ const wireLink=(selector,url)=>{
     const target=linkTargets[label];
     if(target){
       link.setAttribute('href',target);
-      if(target.startsWith('https://')){
+      if(target.startsWith('http://')||target.startsWith('https://')){
         link.setAttribute('target','_blank');
         link.setAttribute('rel','noopener');
       }
